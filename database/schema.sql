@@ -1,0 +1,15 @@
+DROP TABLE IF EXISTS notifications CASCADE;
+DROP TABLE IF EXISTS group_members CASCADE;
+DROP TABLE IF EXISTS study_groups CASCADE;
+DROP TABLE IF EXISTS connection_requests CASCADE;
+DROP TABLE IF EXISTS user_courses CASCADE;
+DROP TABLE IF EXISTS courses CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+CREATE TABLE users(id SERIAL PRIMARY KEY,full_name VARCHAR(120) NOT NULL,email VARCHAR(150) UNIQUE NOT NULL,password_hash TEXT NOT NULL,nim VARCHAR(40),program_study VARCHAR(120) NOT NULL,semester INT NOT NULL,domicile VARCHAR(120),upbjj VARCHAR(120),study_method VARCHAR(30) DEFAULT 'Online',study_time VARCHAR(80) DEFAULT '18:00-21:00',bio TEXT DEFAULT '',whatsapp VARCHAR(30),whatsapp_consent BOOLEAN DEFAULT FALSE,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE courses(id SERIAL PRIMARY KEY,code VARCHAR(30) UNIQUE NOT NULL,name VARCHAR(150) NOT NULL);
+CREATE TABLE user_courses(user_id INT REFERENCES users(id) ON DELETE CASCADE,course_id INT REFERENCES courses(id) ON DELETE CASCADE,PRIMARY KEY(user_id,course_id));
+CREATE TABLE connection_requests(id SERIAL PRIMARY KEY,sender_id INT REFERENCES users(id) ON DELETE CASCADE,receiver_id INT REFERENCES users(id) ON DELETE CASCADE,status VARCHAR(20) DEFAULT 'pending',created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,UNIQUE(sender_id,receiver_id));
+CREATE TABLE study_groups(id SERIAL PRIMARY KEY,name VARCHAR(150) NOT NULL,description TEXT DEFAULT '',course_id INT REFERENCES courses(id) ON DELETE SET NULL,creator_id INT REFERENCES users(id) ON DELETE CASCADE,method VARCHAR(30) DEFAULT 'Online',study_time VARCHAR(80) DEFAULT '18:00-21:00',max_members INT DEFAULT 4,meeting_link TEXT DEFAULT '',created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE group_members(group_id INT REFERENCES study_groups(id) ON DELETE CASCADE,user_id INT REFERENCES users(id) ON DELETE CASCADE,role VARCHAR(20) DEFAULT 'member',joined_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY(group_id,user_id));
+CREATE TABLE notifications(id SERIAL PRIMARY KEY,user_id INT REFERENCES users(id) ON DELETE CASCADE,title VARCHAR(150) NOT NULL,message TEXT NOT NULL,is_read BOOLEAN DEFAULT FALSE,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+INSERT INTO courses(code,name) VALUES ('SI101','Pengantar Sistem Informasi'),('SI201','Analisis dan Perancangan Sistem'),('SI301','Basis Data'),('SI302','Pemrograman Web'),('SI401','Manajemen Proyek Sistem Informasi'),('SI402','Data Warehouse'),('SI403','Tata Kelola Teknologi Informasi'),('CAPSTONE','Capstone Project') ON CONFLICT DO NOTHING;

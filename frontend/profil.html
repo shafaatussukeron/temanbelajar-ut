@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Profil - TemanBelajar UT</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div id="toast"></div>
+
+    <section id="app">
+      <!-- SIDEBAR -->
+
+      <aside>
+        <div class="logo">
+          <div class="brand-mark small">TB</div>
+
+          <span>
+            TemanBelajar
+            <br />
+            <small> Universitas Terbuka </small>
+          </span>
+        </div>
+
+        <nav>
+          <button onclick="location.href = 'dashboard.html'">
+            ⌂
+            <span>Dashboard</span>
+          </button>
+
+          <button onclick="location.href = 'cari-teman.html'">
+            ⌕
+            <span>Cari Teman</span>
+          </button>
+
+          <button onclick="location.href = 'notifikasi.html'">
+            🔔
+            <span>
+              Notifikasi
+              <b id="notificationBadge" class="notification-badge hide">0</b>
+            </span>
+          </button>
+
+          <button onclick="location.href = 'kelompok.html'">
+            ◫
+            <span>Kelompok</span>
+          </button>
+
+          <button onclick="location.href = 'mata-kuliah.html'">
+            ▣
+            <span>Mata Kuliah</span>
+          </button>
+
+          <button class="active">
+            ◎
+            <span>Profil</span>
+          </button>
+
+          <div id="adminMenu" class="admin-menu hide">
+            <div class="nav-section-title">ADMINISTRATOR</div>
+
+            <button onclick="location.href = 'admin.html'">
+              ⚙
+              <span>Panel Admin</span>
+            </button>
+          </div>
+        </nav>
+
+        <button class="logout" onclick="logout()">
+          ↪
+          <span>Keluar</span>
+        </button>
+      </aside>
+
+      <!-- MAIN -->
+
+      <main>
+        <header>
+          <div>
+            <small> RUANG BELAJAR </small>
+
+            <h2>Profil</h2>
+          </div>
+
+          <div class="user-chip">
+            <div class="mini-avatar" id="avatar">M</div>
+
+            <b id="who"> Mahasiswa </b>
+          </div>
+        </header>
+
+        <div class="wrap">
+          <div class="head">
+            <div>
+              <h2>Profil Saya</h2>
+
+              <p>Atur informasi yang terlihat oleh calon teman belajar.</p>
+            </div>
+          </div>
+
+          <!-- PROFILE FORM -->
+
+          <form class="profile" onsubmit="save(event)">
+            <div class="profile-grid">
+              <label>
+                Nama
+
+                <input id="pn" placeholder="Nama" />
+              </label>
+
+              <label>
+                NIM
+
+                <input id="pnim" placeholder="NIM" />
+              </label>
+
+              <label>
+                Program studi
+
+                <input id="pp" placeholder="Program studi" />
+              </label>
+
+              <label>
+                Semester
+
+                <input id="psem" type="number" placeholder="Semester" />
+              </label>
+
+              <label>
+                Domisili
+
+                <select id="pd">
+                  <option value="">Pilih Kabupaten / Kota</option>
+                </select>
+              </label>
+
+              <label>
+                UPBJJ
+
+                <input id="pu" placeholder="UPBJJ" />
+              </label>
+
+              <label>
+                Metode belajar
+
+                <select id="pm">
+                  <option>Online</option>
+
+                  <option>Offline</option>
+
+                  <option>Online & Offline</option>
+                </select>
+              </label>
+
+              <label>
+                Waktu belajar
+
+                <select id="pt">
+                  <option value="">Pilih waktu belajar</option>
+
+                  <option value="06:00-09:00">06:00-09:00</option>
+
+                  <option value="09:00-12:00">09:00-12:00</option>
+
+                  <option value="12:00-15:00">12:00-15:00</option>
+
+                  <option value="15:00-18:00">15:00-18:00</option>
+
+                  <option value="18:00-21:00">18:00-21:00</option>
+
+                  <option value="21:00-24:00">21:00-24:00</option>
+                </select>
+              </label>
+            </div>
+
+            <label>
+              Biodata singkat
+
+              <textarea
+                id="pb"
+                placeholder="Ceritakan sedikit tentang dirimu dan kebutuhan belajar kamu."
+              >
+              </textarea>
+            </label>
+
+            <div class="profile-contact">
+              <h3>Kontak</h3>
+
+              <label>
+                Nomor WhatsApp
+
+                <input id="pw" placeholder="08xxxxxxxxxx" />
+              </label>
+
+              <label class="check">
+                <input id="pc" type="checkbox" />
+
+                Izinkan WhatsApp dibagikan setelah koneksi disetujui
+              </label>
+            </div>
+
+            <button type="submit">Simpan Perubahan</button>
+          </form>
+        </div>
+      </main>
+    </section>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>

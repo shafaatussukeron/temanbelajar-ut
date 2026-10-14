@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Notifikasi - TemanBelajar UT</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div id="toast"></div>
+
+    <section id="app">
+      <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+      <aside>
+        <div class="logo">
+          <div class="brand-mark small">TB</div>
+
+          <span>
+            TemanBelajar
+            <br />
+
+            <small> Universitas Terbuka </small>
+          </span>
+        </div>
+
+        <nav>
+          <button onclick="location.href = 'dashboard.html'">
+            ⌂
+            <span> Dashboard </span>
+          </button>
+
+          <button onclick="location.href = 'cari-teman.html'">
+            ⌕
+            <span> Cari Teman </span>
+          </button>
+
+          <button onclick="location.href = 'koneksi.html'">
+            ♡
+            <span> Koneksi </span>
+          </button>
+
+          <button onclick="location.href = 'notifikasi.html'" class="active">
+            🔔
+            <span>
+              Notifikasi
+              <b id="notificationBadge" class="notification-badge hide">0</b>
+            </span>
+          </button>
+
+          <button onclick="location.href = 'kelompok.html'">
+            ◫
+            <span> Kelompok </span>
+          </button>
+
+          <button onclick="location.href = 'mata-kuliah.html'">
+            ▣
+            <span> Mata Kuliah </span>
+          </button>
+
+          <button onclick="location.href = 'profil.html'">
+            ◎
+            <span> Profil </span>
+          </button>
+
+          <!-- =================================================
+             ADMIN
+        ================================================== -->
+
+          <div id="adminMenu" class="admin-menu hide">
+            <div class="nav-section-title">ADMINISTRATOR</div>
+
+            <button onclick="location.href = 'admin.html'">
+              ⚙
+              <span> Panel Admin </span>
+            </button>
+          </div>
+        </nav>
+
+        <!-- =================================================
+           LOGOUT
+      ================================================== -->
+
+        <button class="logout" onclick="logout()">
+          ↪
+
+          <span> Keluar </span>
+        </button>
+      </aside>
+
+      <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+      <main>
+        <!-- =================================================
+           HEADER
+      ================================================== -->
+
+        <header>
+          <div>
+            <small> RUANG BELAJAR </small>
+
+            <h2>Notifikasi</h2>
+          </div>
+
+          <div class="user-chip">
+            <div class="mini-avatar" id="avatar">U</div>
+
+            <strong id="who"> Mahasiswa </strong>
+          </div>
+        </header>
+
+        <div class="content">
+          <!-- =================================================
+             HERO
+        ================================================== -->
+
+          <section class="hero">
+            <div>
+              <small> TEMAN BELAJAR </small>
+
+              <h1>Notifikasi kamu</h1>
+
+              <p>
+                Lihat permintaan koneksi dan aktivitas terbaru dari teman
+                belajar kamu.
+              </p>
+            </div>
+
+            <div class="hero-art">🔔</div>
+          </section>
+
+          <!-- =================================================
+             PERMINTAAN MASUK
+        ================================================== -->
+
+          <section class="panel notification-panel">
+            <div class="section-head">
+              <div>
+                <small> PERMINTAAN MASUK </small>
+
+                <h2>Permintaan koneksi</h2>
+              </div>
+            </div>
+
+            <div id="incomingRequests" class="notification-list">
+              <div class="empty">Memuat permintaan masuk...</div>
+            </div>
+          </section>
+
+          <!-- =================================================
+             PERMINTAAN TERKIRIM
+        ================================================== -->
+
+          <section class="panel notification-panel">
+            <div class="section-head">
+              <div>
+                <small> PERMINTAAN TERKIRIM </small>
+
+                <h2>Menunggu persetujuan</h2>
+              </div>
+            </div>
+
+            <div id="outgoingRequests" class="notification-list">
+              <div class="empty">Memuat permintaan terkirim...</div>
+            </div>
+          </section>
+
+          <!-- =================================================
+             AKTIVITAS / NOTIFIKASI
+        ================================================== -->
+
+          <section class="panel notification-panel">
+            <div class="section-head">
+              <div>
+                <small> AKTIVITAS TERBARU </small>
+
+                <h2>Notifikasi</h2>
+              </div>
+
+              <button
+                type="button"
+                class="notification-read-all"
+                onclick="markAllNotificationsRead()"
+              >
+                Tandai semua dibaca
+              </button>
+            </div>
+
+            <div id="notificationList" class="notification-list">
+              <div class="empty">Memuat notifikasi...</div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </section>
+
+    <!-- =========================================================
+       JAVASCRIPT
+  ========================================================== -->
+
+    <script src="js/app.js"></script>
+  </body>
+</html>

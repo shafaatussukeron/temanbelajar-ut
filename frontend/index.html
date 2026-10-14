@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>TemanBelajar UT</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!-- TOAST -->
+    <div id="toast"></div>
+
+    <!-- =========================
+         AUTH
+    ========================== -->
+
+    <section id="auth">
+      <div class="auth-shell">
+        <!-- BRAND -->
+
+        <div class="auth-brand">
+          <div class="brand-mark">TB</div>
+
+          <div>
+            <b> TemanBelajar <span>UT</span> </b>
+
+            <small> Ruang belajar mahasiswa Universitas Terbuka </small>
+          </div>
+        </div>
+
+        <!-- AUTH GRID -->
+
+        <div class="auth-grid">
+          <!-- LEFT -->
+
+          <div class="auth-visual">
+            <div class="eyebrow">TEMAN BELAJAR UT</div>
+
+            <h1>
+              Belajar bersama,
+              <br />
+              <span>lebih terarah.</span>
+            </h1>
+
+            <p>
+              Temukan mahasiswa UT dengan mata kuliah, waktu, dan metode belajar
+              yang sesuai dengan kebutuhanmu.
+            </p>
+
+            <div class="visual-points">
+              <div>
+                <b>01</b>
+                <span> Cari teman berdasarkan mata kuliah </span>
+              </div>
+
+              <div>
+                <b>02</b>
+                <span> Bentuk kelompok belajar kecil </span>
+              </div>
+
+              <div>
+                <b>03</b>
+                <span> Atur profil dan preferensi belajar </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT -->
+
+          <div class="auth-card">
+            <!-- TABS -->
+
+            <div class="tabs">
+              <button class="auth-tab active" onclick="tab(0)" type="button">
+                Masuk
+              </button>
+
+              <button class="auth-tab" onclick="tab(1)" type="button">
+                Daftar
+              </button>
+            </div>
+
+            <!-- =====================
+                         LOGIN
+                    ====================== -->
+
+            <form id="login" onsubmit="login(event)">
+              <div>
+                <h2>Selamat datang kembali</h2>
+
+                <p class="muted">
+                  Masuk untuk melanjutkan ke ruang belajar kamu.
+                </p>
+              </div>
+
+              <label>
+                Email
+
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="nama@email.com"
+                  autocomplete="email"
+                  required
+                />
+              </label>
+
+              <label>
+                Password
+
+                <div class="password-wrapper">
+                  <input
+                    id="password"
+                    type="password"
+                    placeholder="Masukkan password"
+                    autocomplete="current-password"
+                    required
+                  />
+
+                  <button
+                    type="button"
+                    class="password-toggle"
+                    onclick="togglePassword('password', this)"
+                    aria-label="Tampilkan password"
+                  >
+                    👁️
+                  </button>
+                </div>
+              </label>
+
+              <button class="primary wide" type="submit">
+                Masuk ke Dashboard
+              </button>
+
+              <p class="secure">
+                🔒 Data akun digunakan untuk kebutuhan aplikasi.
+              </p>
+            </form>
+
+            <!-- =====================
+                         REGISTER
+                    ====================== -->
+
+            <form id="reg" class="hide" onsubmit="reg(event)">
+              <div>
+                <h2>Buat akun baru</h2>
+
+                <p class="muted">
+                  Lengkapi data dasar untuk mulai mencari teman belajar.
+                </p>
+              </div>
+
+              <label>
+                Nama lengkap
+
+                <input id="rn" placeholder="Nama lengkap" required />
+              </label>
+
+              <label>
+                Email
+
+                <input
+                  id="re"
+                  type="email"
+                  placeholder="nama@email.com"
+                  required
+                />
+              </label>
+
+              <label>
+                Password
+
+                <div class="password-wrapper">
+                  <input
+                    id="rp"
+                    type="password"
+                    placeholder="Minimal 6 karakter"
+                    minlength="6"
+                    required
+                  />
+
+                  <button
+                    type="button"
+                    class="password-toggle"
+                    onclick="togglePassword('rp', this)"
+                    aria-label="Tampilkan password"
+                  >
+                    👁️
+                  </button>
+                </div>
+              </label>
+
+              <label>
+                Konfirmasi Password
+
+                <div class="password-wrapper">
+                  <input
+                    id="rpc"
+                    type="password"
+                    placeholder="Ulangi password"
+                    minlength="6"
+                    required
+                  />
+
+                  <button
+                    type="button"
+                    class="password-toggle"
+                    onclick="togglePassword('rpc', this)"
+                    aria-label="Tampilkan password"
+                  >
+                    👁️
+                  </button>
+                </div>
+              </label>
+
+              <div class="two">
+                <label>
+                  Program studi
+
+                  <input id="rs" value="Sistem Informasi" required />
+                </label>
+
+                <label>
+                  Semester
+
+                  <input
+                    id="rsem"
+                    type="number"
+                    value="7"
+                    min="1"
+                    max="14"
+                    required
+                  />
+                </label>
+              </div>
+
+              <label>
+                Domisili
+                <span class="optional"> opsional </span>
+
+                <input id="rd" placeholder="Kabupaten / Kota" />
+              </label>
+
+              <button class="primary wide" type="submit">Buat Akun</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- FOOTER -->
+
+        <div class="auth-footer">
+          © 2026 TemanBelajar UT · Prototype Capstone Project
+        </div>
+      </div>
+    </section>
+
+    <!-- JAVASCRIPT -->
+
+    <script src="js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1">
+
+    <title>Chat - TemanBelajar UT</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css">
+
+    <style>
+
+        /* =================================================
+           CHAT
+        ================================================= */
+
+        .chat-page {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 20px;
+            height: calc(100vh - 150px);
+            min-height: 500px;
+        }
+
+
+        /* =================================================
+           DAFTAR TEMAN
+        ================================================= */
+
+        .chat-users {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-users-header {
+            padding: 18px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .chat-users-header h3 {
+            margin: 0 0 5px;
+        }
+
+        .chat-users-header p {
+            margin: 0;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        #chatUserList {
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .chat-user {
+            width: 100%;
+            border: none;
+            border-bottom: 1px solid #eef0f4;
+            background: white;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .chat-user:hover {
+            background: #f8fafc;
+        }
+
+        .chat-user.active {
+            background: #eff6ff;
+        }
+
+        .chat-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .chat-user-info {
+            min-width: 0;
+        }
+
+        .chat-user-name {
+            font-weight: 700;
+            color: #172033;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chat-user-detail {
+            margin-top: 3px;
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+
+        /* =================================================
+           RUANG CHAT
+        ================================================= */
+
+        .chat-box {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chat-header-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .chat-header-name {
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .chat-header-status {
+            font-size: 12px;
+            color: #6b7280;
+            margin-top: 2px;
+        }
+
+
+        /* =================================================
+           PESAN
+        ================================================= */
+
+        #chatMessages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8fafc;
+        }
+
+        .chat-empty {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #6b7280;
+            padding: 30px;
+        }
+
+        .message-row {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .message-row.mine {
+            justify-content: flex-end;
+        }
+
+        .message-bubble {
+            max-width: 70%;
+            padding: 10px 14px;
+            border-radius: 14px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            color: #172033;
+            font-size: 14px;
+            line-height: 1.45;
+            word-break: break-word;
+        }
+
+        .message-row.mine .message-bubble {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-row:not(.mine) .message-bubble {
+            border-bottom-left-radius: 4px;
+        }
+
+        .message-time {
+            display: block;
+            margin-top: 4px;
+            font-size: 10px;
+            opacity: 0.7;
+        }
+
+
+        /* =================================================
+           FORM KIRIM
+        ================================================= */
+
+        .chat-form {
+            padding: 14px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 10px;
+        }
+
+        #chatInput {
+            flex: 1;
+            height: 42px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 0 14px;
+            font-family: inherit;
+            font-size: 14px;
+            outline: none;
+        }
+
+        #chatInput:focus {
+            border-color: var(--primary);
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+        .chat-form button {
+            border: none;
+            border-radius: 10px;
+            padding: 0 20px;
+            background: var(--primary);
+            color: white;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .chat-form button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+
+        /* =================================================
+           RESPONSIVE
+        ================================================= */
+
+        @media (max-width: 800px) {
+
+            .chat-page {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+
+            .chat-users {
+                min-height: 220px;
+            }
+
+            .chat-box {
+                min-height: 500px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div id="toast"></div>
+
+
+<section id="app">
+
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================= -->
+
+    <aside>
+
+        <div class="logo">
+
+            <div class="brand-mark small">
+                TB
+            </div>
+
+            <span>
+                TemanBelajar
+                <br>
+                <small>
+                    Universitas Terbuka
+                </small>
+            </span>
+
+        </div>
+
+
+        <nav>
+
+            <button
+                onclick="location.href='dashboard.html'">
+
+                ⌂
+                <span>Dashboard</span>
+
+            </button>
+
+
+            <button
+                onclick="location.href='cari-teman.html'">
+
+                ⌕
+                <span>Cari Teman</span>
+
+            </button>
+
+
+            <!-- CHAT -->
+
+            <button class="active">
+
+                💬
+                <span>Chat</span>
+
+            </button>
+
+
+            <button
+                onclick="location.href='kelompok.html'">
+
+                ◫
+                <span>Kelompok</span>
+
+            </button>
+
+
+            <button
+                onclick="location.href='mata-kuliah.html'">
+
+                ▣
+                <span>Mata Kuliah</span>
+
+            </button>
+
+
+            <button
+                onclick="location.href='profil.html'">
+
+                ◎
+                <span>Profil</span>
+
+            </button>
+
+
+            <!-- ADMIN -->
+
+            <div
+                id="adminMenu"
+                class="admin-menu hide">
+
+                <div class="nav-section-title">
+                    ADMINISTRATOR
+                </div>
+
+                <button
+                    onclick="location.href='admin.html'">
+
+                    ⚙
+                    <span>Panel Admin</span>
+
+                </button>
+
+            </div>
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <button
+            class="logout"
+            onclick="logout()">
+
+            ↪
+            <span>Logout</span>
+
+        </button>
+
+    </aside>
+
+
+    <!-- =================================================
+         MAIN
+    ================================================= -->
+
+    <main>
+
+
+        <!-- HEADER -->
+
+        <header>
+
+            <div>
+
+                <small>
+                    RUANG BELAJAR
+                </small>
+
+                <h2>
+                    Chat
+                </h2>
+
+            </div>
+
+
+            <div class="user-chip">
+
+    <div
+        id="avatar"
+        class="mini-avatar">
+        ?
+    </div>
+
+    <strong id="who">
+        Mahasiswa
+    </strong>
+
+</div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =================================================
+             CHAT PAGE
+        ================================================= -->
+
+        <div class="chat-page">
+
+
+            <!-- DAFTAR TEMAN -->
+
+            <section class="chat-users">
+
+                <div class="chat-users-header">
+
+                    <h3>
+                        Teman Terhubung
+                    </h3>
+
+                    <p>
+                        Pilih teman untuk mulai mengobrol.
+                    </p>
+
+                </div>
+
+
+                <div id="chatUserList">
+
+                    <div class="chat-empty">
+                        Memuat teman...
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- RUANG CHAT -->
+
+            <section class="chat-box">
+
+
+                <div class="chat-header">
+
+                    <div
+                        id="chatHeaderAvatar"
+                        class="chat-header-avatar">
+                        ?
+                    </div>
+
+                    <div>
+
+                        <div
+                            id="chatHeaderName"
+                            class="chat-header-name">
+                            Pilih teman
+                        </div>
+
+                        <div
+                            id="chatHeaderStatus"
+                            class="chat-header-status">
+                            Pilih teman terhubung di sebelah kiri.
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PESAN -->
+
+                <div id="chatMessages">
+
+                    <div class="chat-empty">
+
+                        <div>
+
+                            <div style="font-size:42px;">
+                                💬
+                            </div>
+
+                            <p>
+                                Belum ada percakapan.
+                            </p>
+
+                            <small>
+                                Pilih teman terhubung untuk mulai chat.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FORM -->
+
+                <form
+                    class="chat-form"
+                    onsubmit="sendChat(event)">
+
+                    <input
+                        id="chatInput"
+                        type="text"
+                        placeholder="Tulis pesan..."
+                        autocomplete="off"
+                        disabled>
+
+                    <button
+                        id="chatSend"
+                        type="submit"
+                        disabled>
+
+                        Kirim
+
+                    </button>
+
+                </form>
+
+
+            </section>
+
+        </div>
+
+    </main>
+
+</section>
+
+
+<script src="js/app.js"></script>
+
+</body>
+
+</html>

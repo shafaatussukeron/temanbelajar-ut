@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Dashboard - TemanBelajar UT</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div id="toast"></div>
+
+    <section id="app">
+      <!-- =========================
+             SIDEBAR
+        ========================== -->
+
+      <aside>
+        <div class="logo">
+          <div class="brand-mark small">TB</div>
+
+          <span>
+            TemanBelajar
+            <br />
+            <small>Universitas Terbuka</small>
+          </span>
+        </div>
+
+        <!-- NAVIGATION -->
+
+        <nav>
+          <button class="active" onclick="location.href = 'dashboard.html'">
+            ⌂
+            <span>Dashboard</span>
+          </button>
+
+          <button onclick="location.href = 'cari-teman.html'">
+            ⌕
+            <span>Cari Teman</span>
+          </button>
+
+          <button onclick="location.href = 'koneksi.html'">
+            ♡
+            <span>Koneksi</span>
+          </button>
+
+          <button onclick="location.href = 'notifikasi.html'">
+            🔔
+            <span>
+              Notifikasi
+              <b id="notificationBadge" class="notification-badge hide"> 0 </b>
+            </span>
+          </button>
+
+          <button onclick="location.href = 'kelompok.html'">
+            ◫
+            <span>Kelompok</span>
+          </button>
+
+          <button onclick="location.href = 'mata-kuliah.html'">
+            ▣
+            <span>Mata Kuliah</span>
+          </button>
+
+          <button onclick="location.href = 'profil.html'">
+            ◎
+            <span>Profil</span>
+          </button>
+
+          <!-- ADMIN -->
+
+          <div id="adminMenu" class="admin-menu hide">
+            <div class="nav-section-title">ADMINISTRATOR</div>
+
+            <button onclick="location.href = 'admin.html'">
+              ⚙
+              <span>Panel Admin</span>
+            </button>
+          </div>
+        </nav>
+
+        <!-- LOGOUT -->
+
+        <button class="logout" onclick="logout()">
+          ↪
+          <span>Logout</span>
+        </button>
+      </aside>
+
+      <!-- =========================
+             MAIN
+        ========================== -->
+
+      <main>
+        <!-- HEADER -->
+
+        <header>
+          <div>
+            <small> RUANG BELAJAR </small>
+
+            <h2>Dashboard</h2>
+          </div>
+
+          <div class="user-chip">
+            <div class="mini-avatar" id="avatar">M</div>
+
+            <b id="who"> Mahasiswa </b>
+          </div>
+        </header>
+
+        <!-- CONTENT -->
+
+        <div class="wrap">
+          <!-- =========================
+                     HERO
+                ========================== -->
+
+          <div class="hero">
+            <div>
+              <small> BELAJAR BERSAMA </small>
+
+              <h1>
+                Halo,
+                <span id="hello"> Mahasiswa </span>
+                👋
+              </h1>
+
+              <p>
+                Temukan mahasiswa UT yang sesuai dengan mata kuliah, waktu, dan
+                metode belajar kamu.
+              </p>
+
+              <button onclick="location.href = 'cari-teman.html'">
+                Cari teman sekarang →
+              </button>
+            </div>
+
+            <div class="hero-art">TB</div>
+          </div>
+
+          <!-- =========================
+     STATISTICS
+========================== -->
+
+          <div class="stats dashboard-stats">
+            <div class="stat-card">
+              <div class="stat-icon">👥</div>
+
+              <div class="stat-content">
+                <span>Teman tersedia</span>
+                <b id="s1">0</b>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon">📚</div>
+
+              <div class="stat-content">
+                <span>Mata kuliah saya</span>
+                <b id="s2">0</b>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon">🎓</div>
+
+              <div class="stat-content">
+                <span>Kelompok belajar</span>
+                <b id="s3">0</b>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon">🔗</div>
+
+              <div class="stat-content">
+                <span>Koneksi</span>
+                <b id="s4">0</b>
+              </div>
+            </div>
+          </div>
+
+          <!-- =========================
+     AKSI CEPAT
+========================== -->
+
+          <div class="dashboard-section-head">
+            <div>
+              <h3>Akses Cepat</h3>
+
+              <p>Gunakan fitur utama TemanBelajar UT.</p>
+            </div>
+          </div>
+
+          <div class="quick dashboard-quick">
+            <button type="button" onclick="location.href = 'mata-kuliah.html'">
+              <div class="quick-icon">📚</div>
+
+              <div class="quick-content">
+                <strong>Atur Mata Kuliah</strong>
+
+                <small> Kelola mata kuliah yang sedang kamu tempuh. </small>
+
+                <span class="quick-link"> Buka Mata Kuliah → </span>
+              </div>
+            </button>
+
+            <button type="button" onclick="location.href = 'cari-teman.html'">
+              <div class="quick-icon">🔍</div>
+
+              <div class="quick-content">
+                <strong>Cari Teman Belajar</strong>
+
+                <small>
+                  Temukan mahasiswa berdasarkan mata kuliah dan preferensi
+                  belajar.
+                </small>
+
+                <span class="quick-link"> Cari Teman → </span>
+              </div>
+            </button>
+
+            <button type="button" onclick="location.href = 'kelompok.html'">
+              <div class="quick-icon">👥</div>
+
+              <div class="quick-content">
+                <strong>Bentuk Kelompok</strong>
+
+                <small> Buat ruang belajar bersama mahasiswa UT. </small>
+
+                <span class="quick-link"> Lihat Kelompok → </span>
+              </div>
+            </button>
+          </div>
+
+          <!-- =========================
+     FITUR UTAMA
+========================== -->
+
+          <div class="dashboard-section-head dashboard-feature-head">
+            <div>
+              <h3>Belajar Lebih Terarah</h3>
+
+              <p>
+                Manfaatkan fitur TemanBelajar untuk menemukan teman belajar yang
+                sesuai.
+              </p>
+            </div>
+          </div>
+
+          <div class="dashboard-info">
+            <!-- KLIK → MATA KULIAH -->
+
+            <button
+              type="button"
+              class="info-card info-action"
+              onclick="location.href = 'mata-kuliah.html'"
+            >
+              <div class="info-icon">📚</div>
+
+              <div class="info-content">
+                <h3>Belajar sesuai mata kuliah</h3>
+
+                <p>
+                  Tambahkan mata kuliah yang sedang kamu tempuh agar sistem
+                  dapat membantu menemukan teman belajar yang relevan.
+                </p>
+
+                <span class="info-link"> Atur mata kuliah → </span>
+              </div>
+            </button>
+
+            <!-- KLIK → CARI TEMAN -->
+
+            <button
+              type="button"
+              class="info-card info-action"
+              onclick="location.href = 'cari-teman.html'"
+            >
+              <div class="info-icon">👥</div>
+
+              <div class="info-content">
+                <h3>Belajar bersama mahasiswa UT</h3>
+
+                <p>
+                  Temukan mahasiswa lain yang memiliki mata kuliah dan
+                  preferensi belajar yang sama.
+                </p>
+
+                <span class="info-link"> Cari teman belajar → </span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </main>
+    </section>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>

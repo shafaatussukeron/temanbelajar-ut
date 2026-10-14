@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Mata Kuliah - TemanBelajar UT</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div id="toast"></div>
+
+    <section id="app">
+      <!-- SIDEBAR -->
+
+      <aside>
+        <div class="logo">
+          <div class="brand-mark small">TB</div>
+
+          <span>
+            TemanBelajar
+            <br />
+            <small> Universitas Terbuka </small>
+          </span>
+        </div>
+
+        <nav>
+          <button onclick="location.href = 'dashboard.html'">
+            ⌂
+            <span>Dashboard</span>
+          </button>
+
+          <button onclick="location.href = 'cari-teman.html'">
+            ⌕
+            <span>Cari Teman</span>
+          </button>
+
+          <button onclick="location.href = 'notifikasi.html'">
+            🔔
+            <span>
+              Notifikasi
+              <b id="notificationBadge" class="notification-badge hide">0</b>
+            </span>
+          </button>
+
+          <button onclick="location.href = 'kelompok.html'">
+            ◫
+            <span>Kelompok</span>
+          </button>
+
+          <button class="active">
+            ▣
+            <span>Mata Kuliah</span>
+          </button>
+
+          <button onclick="location.href = 'profil.html'">
+            ◎
+            <span>Profil</span>
+          </button>
+
+          <div id="adminMenu" class="admin-menu hide">
+            <div class="nav-section-title">ADMINISTRATOR</div>
+
+            <button onclick="location.href = 'admin.html'">
+              ⚙
+              <span>Panel Admin</span>
+            </button>
+          </div>
+        </nav>
+
+        <button class="logout" onclick="logout()">
+          ↪
+          <span>Logout</span>
+        </button>
+      </aside>
+
+      <!-- MAIN -->
+
+      <main>
+        <header>
+          <div>
+            <small> RUANG BELAJAR </small>
+
+            <h2>Mata Kuliah</h2>
+          </div>
+
+          <div class="user-chip">
+            <div class="mini-avatar" id="avatar">M</div>
+
+            <b id="who"> Mahasiswa </b>
+          </div>
+        </header>
+
+        <div class="wrap">
+          <div class="head">
+            <div>
+              <h2>Mata Kuliah Saya</h2>
+
+              <p>Pilih mata kuliah yang sedang kamu tempuh.</p>
+            </div>
+          </div>
+
+          <!-- ADD COURSE -->
+
+          <div class="add">
+            <select id="cs">
+              <option value="">Pilih mata kuliah</option>
+            </select>
+
+            <button onclick="addC()">+ Tambahkan</button>
+          </div>
+
+          <!-- COURSE LIST -->
+
+          <div id="myc" class="list"></div>
+        </div>
+      </main>
+    </section>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>

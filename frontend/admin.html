@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Panel Admin - TemanBelajar UT</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div id="toast"></div>
+
+    <section id="app">
+      <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+      <aside>
+        <div class="logo">
+          <div class="brand-mark small">TB</div>
+
+          <span>
+            TemanBelajar
+            <br />
+            <small> Universitas Terbuka </small>
+          </span>
+        </div>
+
+        <nav>
+          <button onclick="location.href = 'dashboard.html'">
+            ⌂
+            <span>Dashboard</span>
+          </button>
+
+          <button onclick="location.href = 'cari-teman.html'">
+            ⌕
+            <span>Cari Teman</span>
+          </button>
+
+          <button onclick="location.href = 'notifikasi.html'">
+            🔔
+            <span>
+              Notifikasi
+              <b id="notificationBadge" class="notification-badge hide">0</b>
+            </span>
+          </button>
+
+          <button onclick="location.href = 'kelompok.html'">
+            ◫
+            <span>Kelompok</span>
+          </button>
+
+          <button onclick="location.href = 'mata-kuliah.html'">
+            ▣
+            <span>Mata Kuliah</span>
+          </button>
+
+          <button onclick="location.href = 'profil.html'">
+            ◎
+            <span>Profil</span>
+          </button>
+
+          <!-- ADMIN -->
+
+          <div class="admin-menu">
+            <div class="nav-section-title">ADMINISTRATOR</div>
+
+            <button class="active">
+              ⚙
+              <span>Panel Admin</span>
+            </button>
+          </div>
+        </nav>
+
+        <!-- LOGOUT -->
+
+        <button class="logout" onclick="logout()">
+          ↪
+          <span>Logout</span>
+        </button>
+      </aside>
+
+      <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
+      <main>
+        <!-- HEADER -->
+
+        <header>
+          <div>
+            <small> ADMINISTRATOR </small>
+
+            <h2>Panel Admin</h2>
+          </div>
+
+          <div class="user-chip">
+            <div class="mini-avatar" id="avatar">A</div>
+
+            <b id="who"> Administrator </b>
+          </div>
+        </header>
+
+        <!-- =================================================
+             CONTENT
+        ================================================== -->
+
+        <div class="wrap">
+          <!-- PAGE HEADER -->
+
+          <div class="head">
+            <div>
+              <h2>Panel Administrator</h2>
+
+              <p>Kelola data dan aktivitas TemanBelajar UT.</p>
+            </div>
+          </div>
+
+          <!-- =================================================
+                 ADMIN STATISTICS
+            ================================================== -->
+
+          <div class="admin-stats">
+            <!-- USERS -->
+
+            <div class="admin-stat-card">
+              <div class="admin-stat-icon">👥</div>
+
+              <div>
+                <span> Total Pengguna </span>
+
+                <strong id="adminUsers"> 0 </strong>
+              </div>
+            </div>
+
+            <!-- COURSES -->
+
+            <div class="admin-stat-card">
+              <div class="admin-stat-icon">📚</div>
+
+              <div>
+                <span> Total Mata Kuliah </span>
+
+                <strong id="adminCourses"> 0 </strong>
+              </div>
+            </div>
+
+            <!-- GROUPS -->
+
+            <div class="admin-stat-card">
+              <div class="admin-stat-icon">👥</div>
+
+              <div>
+                <span> Total Kelompok </span>
+
+                <strong id="adminGroups"> 0 </strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- =================================================
+                 ADMIN TABS
+            ================================================== -->
+
+          <div class="admin-tabs">
+            <button
+              id="adminTabCourses"
+              class="admin-tab active"
+              onclick="adminTab('courses')"
+            >
+              📚 Mata Kuliah
+            </button>
+
+            <button
+              id="adminTabUsers"
+              class="admin-tab"
+              onclick="adminTab('users')"
+            >
+              👥 Pengguna
+            </button>
+
+            <button
+              id="adminTabGroups"
+              class="admin-tab"
+              onclick="adminTab('groups')"
+            >
+              👨‍👩‍👧‍👦 Kelompok
+            </button>
+          </div>
+
+          <!-- =================================================
+                 COURSES PANEL
+            ================================================== -->
+
+          <div id="adminCoursesPanel" class="admin-panel">
+            <div class="admin-panel-head">
+              <div>
+                <h3>Kelola Mata Kuliah</h3>
+
+                <p>Tambahkan dan kelola mata kuliah yang tersedia di sistem.</p>
+              </div>
+            </div>
+
+            <!-- ADD COURSE -->
+
+            <div class="admin-course-form">
+              <input id="adminCourseCode" placeholder="Kode mata kuliah" />
+
+              <input id="adminCourseName" placeholder="Nama mata kuliah" />
+
+              <button class="primary" onclick="adminAddCourse()">
+                + Tambah Mata Kuliah
+              </button>
+            </div>
+
+            <!-- COURSE LIST -->
+
+            <div id="adminCourseList"></div>
+          </div>
+
+          <!-- =================================================
+                 USERS PANEL
+            ================================================== -->
+
+          <div id="adminUsersPanel" class="admin-panel hide">
+            <div class="admin-panel-head">
+              <div>
+                <h3>Kelola Pengguna</h3>
+
+                <p>Lihat pengguna dan atur hak akses sistem.</p>
+              </div>
+            </div>
+
+            <div id="adminUserList"></div>
+          </div>
+
+          <!-- =================================================
+                 GROUPS PANEL
+            ================================================== -->
+
+          <div id="adminGroupsPanel" class="admin-panel hide">
+            <div class="admin-panel-head">
+              <div>
+                <h3>Kelola Kelompok</h3>
+
+                <p>Pantau kelompok belajar yang dibuat mahasiswa.</p>
+              </div>
+            </div>
+
+            <div id="adminGroupList"></div>
+          </div>
+        </div>
+      </main>
+    </section>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>

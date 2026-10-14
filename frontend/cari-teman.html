@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Cari Teman - TemanBelajar UT</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <div id="toast"></div>
+
+    <section id="app">
+      <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+      <aside>
+        <div class="logo">
+          <div class="brand-mark small">TB</div>
+
+          <span>
+            TemanBelajar
+            <br />
+            <small> Universitas Terbuka </small>
+          </span>
+        </div>
+
+        <nav>
+          <button onclick="location.href = 'dashboard.html'">
+            ⌂
+            <span>Dashboard</span>
+          </button>
+
+          <button class="active">
+            ⌕
+            <span>Cari Teman</span>
+          </button>
+
+          <button onclick="location.href = 'koneksi.html'">
+            ♡
+            <span>Koneksi</span>
+          </button>
+
+          <button onclick="location.href = 'notifikasi.html'">
+            🔔
+            <span>
+              Notifikasi
+              <b id="notificationBadge" class="notification-badge hide">0</b>
+            </span>
+          </button>
+
+          <button onclick="location.href = 'kelompok.html'">
+            ◫
+            <span>Kelompok</span>
+          </button>
+
+          <button onclick="location.href = 'mata-kuliah.html'">
+            ▣
+            <span>Mata Kuliah</span>
+          </button>
+
+          <button onclick="location.href = 'profil.html'">
+            ◎
+            <span>Profil</span>
+          </button>
+
+          <div id="adminMenu" class="admin-menu hide">
+            <div class="nav-section-title">ADMINISTRATOR</div>
+
+            <button onclick="location.href = 'admin.html'">
+              ⚙
+              <span>Panel Admin</span>
+            </button>
+          </div>
+        </nav>
+
+        <button class="logout" onclick="logout()">
+          ↪
+          <span>Logout</span>
+        </button>
+      </aside>
+
+      <!-- =========================
+         MAIN
+    ========================== -->
+
+      <main>
+        <header>
+          <div>
+            <small> RUANG BELAJAR </small>
+
+            <h2>Cari Teman</h2>
+          </div>
+
+          <div class="user-chip">
+            <div class="mini-avatar" id="avatar">M</div>
+
+            <b id="who"> Mahasiswa </b>
+          </div>
+        </header>
+
+        <div class="wrap">
+          <!-- =========================
+                 TITLE
+            ========================== -->
+
+          <div class="head">
+            <div>
+              <h2>Cari Teman Belajar</h2>
+
+              <p>Temukan mahasiswa dengan kebutuhan belajar yang serupa.</p>
+            </div>
+          </div>
+
+          <!-- =========================
+                 FILTER
+            ========================== -->
+
+          <div class="filters">
+            <!-- MATA KULIAH -->
+            <select id="fc">
+              <option value="">Semua mata kuliah</option>
+
+              <option value="Sistem Informasi">Sistem Informasi</option>
+
+              <option value="Basis Data">Basis Data</option>
+
+              <option value="Pemrograman">Pemrograman</option>
+
+              <option value="Jaringan Komputer">Jaringan Komputer</option>
+
+              <option value="Analisis dan Perancangan Sistem">
+                Analisis dan Perancangan Sistem
+              </option>
+
+              <option value="Manajemen Proyek Sistem Informasi">
+                Manajemen Proyek Sistem Informasi
+              </option>
+
+              <option value="Data Warehouse">Data Warehouse</option>
+
+              <option value="Data Mining">Data Mining</option>
+
+              <option value="Tata Kelola Teknologi Informasi">
+                Tata Kelola Teknologi Informasi
+              </option>
+
+              <option value="Capstone Project">Capstone Project</option>
+            </select>
+
+            <!-- PROGRAM STUDI -->
+            <select id="fp">
+              <option value="">Semua program studi</option>
+
+              <option value="Sistem Informasi">Sistem Informasi</option>
+
+              <option value="Manajemen">Manajemen</option>
+
+              <option value="Akuntansi">Akuntansi</option>
+
+              <option value="Ilmu Komunikasi">Ilmu Komunikasi</option>
+            </select>
+
+            <!-- SEMESTER -->
+            <select id="fs">
+              <option value="">Semua semester</option>
+
+              <option value="1">Semester 1</option>
+
+              <option value="2">Semester 2</option>
+
+              <option value="3">Semester 3</option>
+
+              <option value="4">Semester 4</option>
+
+              <option value="5">Semester 5</option>
+
+              <option value="6">Semester 6</option>
+
+              <option value="7">Semester 7</option>
+
+              <option value="8">Semester 8</option>
+            </select>
+
+            <!-- METODE BELAJAR -->
+            <select id="fm">
+              <option value="">Semua metode</option>
+
+              <option value="Online">Online</option>
+
+              <option value="Offline">Offline</option>
+
+              <option value="Online & Offline">Online & Offline</option>
+            </select>
+
+            <!-- WAKTU BELAJAR -->
+            <select id="ft">
+              <option value="">Semua waktu belajar</option>
+
+              <option value="06.00-09.00">06.00-09.00</option>
+
+              <option value="09.00-12.00">09.00-12.00</option>
+
+              <option value="12.00-15.00">12.00-15.00</option>
+
+              <option value="15.00-18.00">15.00-18.00</option>
+
+              <option value="18:00-21:00">18:00-21:00</option>
+
+              <option value="21:00-24:00">21:00-24:00</option>
+            </select>
+
+            <!-- DOMISILI -->
+            <select id="fd">
+              <option value="">Semua domisili</option>
+            </select>
+
+            <!-- TOMBOL -->
+            <button type="button" onclick="find()">🔎 Cari</button>
+          </div>
+
+          <!-- =========================
+                 PEOPLE
+            ========================== -->
+
+          <div id="people" class="cards"></div>
+        </div>
+      </main>
+    </section>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
