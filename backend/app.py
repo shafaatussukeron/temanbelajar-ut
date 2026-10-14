@@ -16,9 +16,17 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+FRONTEND_DIR = os.path.abspath(
+    os.path.join(
+        os.path.dirname(__file__),
+        '..',
+        'frontend'
+    )
+)
+
 app = Flask(
     __name__,
-    static_folder='../frontend',
+    static_folder=FRONTEND_DIR,
     static_url_path=''
 )
 
@@ -186,39 +194,36 @@ def public_user(user):
 
 @app.get('/')
 def home():
-    return send_from_directory(
-        '../frontend',
-        'index.html'
-    )
+    return send_from_directory(FRONTEND_DIR,'index.html')
     
 @app.route('/dashboard.html')
 def dashboard_page():
-    return send_from_directory('../frontend', 'dashboard.html')
+    return send_from_directory(FRONTEND_DIR, 'dashboard.html')
 
 
 @app.route('/cari-teman.html')
 def cari_teman_page():
-    return send_from_directory('../frontend', 'cari-teman.html')
+    return send_from_directory(FRONTEND_DIR, 'cari-teman.html')
 
 
 @app.route('/kelompok.html')
 def kelompok_page():
-    return send_from_directory('../frontend', 'kelompok.html')
+    return send_from_directory(FRONTEND_DIR, 'kelompok.html')
 
 
 @app.route('/mata-kuliah.html')
 def mata_kuliah_page():
-    return send_from_directory('../frontend', 'mata-kuliah.html')
+    return send_from_directory(FRONTEND_DIR, 'mata-kuliah.html')
 
 
 @app.route('/profil.html')
 def profil_page():
-    return send_from_directory('../frontend', 'profil.html')
+    return send_from_directory(FRONTEND_DIR, 'profil.html')
 
 
 @app.route('/admin.html')
 def admin_page():
-    return send_from_directory('../frontend', 'admin.html')
+    return send_from_directory(FRONTEND_DIR, 'admin.html')
 
 
 # ============================================================
