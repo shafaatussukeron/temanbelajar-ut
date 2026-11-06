@@ -1969,6 +1969,14 @@ async function groups() {
 
                             </div>
 
+                            <button
+    type="button"
+    onclick="viewGroupMembers(${group.id})">
+    👥 Lihat Anggota
+</button>
+
+<div id="members-${group.id}" class="group-members hide"></div>
+
 
                             ${
                               group.joined
@@ -1993,6 +2001,70 @@ async function groups() {
       .join("");
   } catch (x) {
     msg(x.message, "error");
+  }
+}
+
+/* =========================================================
+   VIEW GROUP MEMBERS
+========================================================= */
+
+async function viewGroupMembers(groupId) {
+  const container = $("members-" + groupId);
+
+  if (!container) {
+    return;
+  }
+
+  // Jika daftar sedang terbuka, tutup
+  if (!container.classList.contains("hide")) {
+    container.classList.add("hide");
+    return;
+  }
+
+  try {
+    container.innerHTML = "<p>Memuat anggota...</p>";
+    container.classList.remove("hide");
+
+    const data = await api("/groups/" + groupId + "/members");
+
+    const members = data.members || [];
+
+    if (members.length === 0) {
+      container.innerHTML = `
+        <p>Belum ada anggota kelompok.</p>
+      `;
+      return;
+    }
+
+    container.innerHTML = `
+      <h4>Daftar Anggota (${members.length})</h4>
+
+      ${members
+        .map(
+          (member) => `
+        <div class="group-member-item">
+          <div class="avatar">
+            ${escapeHtml(getInitial(member.full_name))}
+          </div>
+
+          <div>
+            <strong>${escapeHtml(member.full_name)}</strong>
+            <small>
+              ${escapeHtml(member.program_study || "-")}
+              · Semester ${escapeHtml(String(member.semester || "-"))}
+            </small>
+          </div>
+
+          <span>${member.role === "admin" ? "Ketua" : "Anggota"}</span>
+        </div>
+      `,
+        )
+        .join("")}
+    `;
+  } catch (x) {
+    container.innerHTML = `
+      <p>Gagal memuat anggota: ${escapeHtml(x.message)}</p>
+    `;
   }
 }
 

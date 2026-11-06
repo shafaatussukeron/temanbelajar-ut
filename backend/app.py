@@ -1841,6 +1841,93 @@ def groups():
             fetch=True
         )
     )
+    
+    
+# ============================================================
+# DAFTAR ANGGOTA KELOMPOK
+# ============================================================
+
+@app.get('/api/groups/<int:gid>/members')
+def get_group_members(gid):
+
+    user = current()
+
+    if not user:
+        return jsonify(
+            error='Unauthorized'
+        ), 401
+
+    # Pastikan kelompok tersedia
+    group = query(
+        '''
+        SELECT id, name
+        FROM study_groups
+        WHERE id=%s
+        ''',
+        (gid,),
+        one=True
+    )
+
+    if not group:
+        return jsonify(
+            error='Kelompok tidak ditemukan'
+        ), 404
+
+    # Hanya anggota kelompok yang dapat melihat
+    # daftar anggota kelompok tersebut
+    membership = query(
+        '''
+        SELECT user_id
+        FROM group_members
+        WHERE group_id=%s
+        AND user_id=%s
+        ''',
+        (
+            gid,
+            user['id']
+        ),
+        one=True
+    )
+
+    if not membership:
+        return jsonify(
+            error='Kamu harus bergabung untuk melihat anggota kelompok'
+        ), 403
+
+    # Ambil daftar anggota
+    members = query(
+        '''
+        SELECT
+            u.id,
+            u.full_name,
+            u.program_study,
+            u.semester,
+            u.domicile,
+            u.upbjj,
+            u.study_method,
+            u.study_time,
+            gm.role
+        FROM group_members gm
+        JOIN users u
+            ON u.id=gm.user_id
+        WHERE gm.group_id=%s
+        ORDER BY
+            CASE
+                WHEN gm.role='admin' THEN 0
+                ELSE 1
+            END,
+            u.full_name ASC
+        ''',
+        (gid,),
+        fetch=True
+    )
+
+    return jsonify(
+        group=group,
+        members=members,
+        total=len(members)
+    )
+
 
 
 @app.post('/api/groups')
